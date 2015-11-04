@@ -1,0 +1,21 @@
+<h1>All Sermons</h1>
+<hr/>
+<% @sermons.each do |sermon| %>
+<div class="row">
+  <div class="col-md-2">
+    <section class="pastor_info center">
+      <%= gravatar_for sermon.pastor, size: 100 %>
+      <h5>Pastor name: <%= sermon.pastor.pastorname %></h5>
+      
+    </section>
+  </div>
+  <div class="col-lg-8 well">
+    <h4><%= link_to sermon.name, sermon_path(sermon) %></h4>
+    <p><%= sermon.summary %></p>
+    <p>
+      <span class="quiet"><small><%= time_ago_in_words(sermon.created_at) %> ago</small></span>
+    </p>
+  </div>
+</div>
+<hr/>
+<% end %>
