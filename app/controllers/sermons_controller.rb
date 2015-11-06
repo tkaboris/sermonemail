@@ -1,6 +1,7 @@
 class SermonsController < ApplicationController
 	def index
-	  @sermons = Sermon.all
+	  @sermons = Sermon.paginate(page: params[:page], per_page: 4)
+	  # change to sort by date
 	end
 	
 	def show
@@ -39,7 +40,21 @@ class SermonsController < ApplicationController
 	    
 	end
 	
+	def like
+		@sermon = Sermon.find(params[:id])
+		like = Like.create(like: params[:like], pastor: Pastor.first, sermon: @sermon)
+		if like.valid?
+			
+			flash[:success] = "Your selection was successful"
+			redirect_to :back
+		else
+			
+		end
+		flash[:danger] = "you can only like or dislike sermon once"
+		redirect_to :back
+	end
 	
+		
 	private
 	  def sermon_params
 	    params.require(:sermon).permit(:name, :summary, :description, :picture)

@@ -11,7 +11,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106053250) do
+ActiveRecord::Schema.define(version: 20151106070002) do
+
+  create_table "likes", force: :cascade do |t|
+    t.boolean  "like"
+    t.integer  "pastor_id"
+    t.integer  "sermon_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "pastors", force: :cascade do |t|
     t.string   "pastorname"
