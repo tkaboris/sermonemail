@@ -10,6 +10,9 @@
   <div class="col-md-8">
     <%= link_to "Edit this Sermon", edit_sermon_path(@sermon), class: "btn btn-success pull-right" %>
     <h3><%= @sermon.summary %></h3>
+    <div class="show_sermon">
+      <%= image_tag(@sermon.picture.url, class: "gravatar") if @sermon.picture? %>
+    </div>
       <div class="well">
         <p>
           <strong>Sermon:</strong>
