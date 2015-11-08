@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151106070002) do
+ActiveRecord::Schema.define(version: 20151106210841) do
 
   create_table "likes", force: :cascade do |t|
     t.boolean  "like"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20151106070002) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "password_digest"
   end
 
   create_table "sermons", force: :cascade do |t|

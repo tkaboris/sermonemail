@@ -1,0 +1,19 @@
+<%= render 'shared/errors', obj: @pastor %>
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for @pastor do |f| %>
+    <%= f.label :pastorname %>
+    <%= f.text_field :pastorname %>
+    
+    <%= f.label :email %>
+    <%= f.email_field :email %>
+    
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+    
+    
+    <%= f.submit(@pastor.new_record? ? "Register" : "Edit Your Profile", class: "btn btn-success") %>
+    <%= link_to "Cancel", :back, class:"btn btn-danger" %>
+    <% end %>
+  </div>
+</div>

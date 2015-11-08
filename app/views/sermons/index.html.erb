@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-md-2">
     <section class="pastor_info center">
-      <%= gravatar_for sermon.pastor, size: 100 %>
+      <%= link_to gravatar_for(sermon.pastor, size: 100), sermon_path(sermon.pastor) %>
       <h5>Pastor name: <%= sermon.pastor.pastorname %></h5>
       
     </section>
