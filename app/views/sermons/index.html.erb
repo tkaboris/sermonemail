@@ -1,4 +1,14 @@
 <%= render 'shared/page_title', title: "All Sermons" %>
+
+<ul class="nav nav-tabs">
+  <li class="active">
+    <%= link_to "Sermons", sermons_path %>
+  </li>
+  <li>
+     <%= link_to "Pastors", pastors_path %>
+  </li>
+</ul>
+
 <%= will_paginate %>
 <% @sermons.each do |sermon| %>
 <div class="row">

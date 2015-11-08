@@ -1,5 +1,5 @@
 class PastorsController < ApplicationController
-  before_action :set_pastor, only[:edit, :update, :show]
+  before_action :set_pastor, only:[:edit, :update, :show]
   before_action :require_same_user, only: [:edit, :update]
   
   
