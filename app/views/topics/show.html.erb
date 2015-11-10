@@ -1,4 +1,4 @@
-<%= render 'shared/page_title', title: "All Sermons" %>
+<%= render 'shared/page_title', title: "Topic for : " + @topic.name %>
 
 <ul class="nav nav-tabs">
   <li class="active">
@@ -9,8 +9,9 @@
   </li>
 </ul>
 
-<%= will_paginate %>
-<% @sermons.each do |sermon| %>
+<%= will_paginate @sermons %>
+
+<% @topic.sermons.each do |sermon| %>
 <div class="row">
   <div class="col-md-2">
     <section class="pastor_info center">
@@ -45,4 +46,4 @@
 <hr/>
 <% end %>
 
-<%= will_paginate %>
+<%= will_paginate  @sermons %>

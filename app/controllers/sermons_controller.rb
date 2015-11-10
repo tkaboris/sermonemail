@@ -1,6 +1,7 @@
 class SermonsController < ApplicationController
 	before_action :set_sermon, only: [:edit, :update, :show, :like]
-	before_action :require_user, except: [:show, :index]
+	before_action :require_user, except: [:show, :index, :like]
+	before_action :require_user_like, only: [:like]
 	before_action :require_same_user, only: [:edit, :update]
 	
 	
@@ -61,7 +62,7 @@ class SermonsController < ApplicationController
 		
 	private
 	  def sermon_params
-	    params.require(:sermon).permit(:name, :summary, :description, :picture)
+	    params.require(:sermon).permit(:name, :summary, :description, :picture, topic_ids: [], category_ids: [])
 	  end
 	  
 	  def set_sermon
@@ -73,5 +74,5 @@ class SermonsController < ApplicationController
 	  		flash[:danger] = "You can only edit your sermons"
 	  		redirect_to sermons_path
 	  	end
-			end
+		end
 end

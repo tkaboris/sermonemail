@@ -16,7 +16,15 @@ class ApplicationController < ActionController::Base
   def require_user
     if !logged_in?
       flash[:danger] = "You must be logged in to perform this action"
+      redirect_to sermons_path
+    end
+  end
+  
+  def require_user_like
+    if !logged_in?
+      flash[:danger] = "You must be logged in to perform this action"
       redirect_to :back
     end
   end
+  
 end

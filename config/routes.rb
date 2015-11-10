@@ -14,5 +14,8 @@ Rails.application.routes.draw do
  get '/login', to: "logins#new"
  post '/login', to: "logins#create"
  get '/logout', to: "logins#destroy"
+ 
+ resources :topics, only: [:new, :create, :show]
+ resources :categories, only: [:new, :create, :show]
   
 end
