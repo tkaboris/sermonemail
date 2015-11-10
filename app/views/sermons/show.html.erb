@@ -16,8 +16,12 @@
       <%= image_tag(@sermon.picture.url, class: "gravatar") if @sermon.picture? %>
     </div>
       <div class="well">
-        <p>Topic: <%= render @sermon.topics %></p>
-    <p>Category: <%= render @sermon.categories %></p>
+        <% if @sermon.topics.any? %>
+          <p>Topic: <%= render @sermon.topics %></p>
+        <% end %>
+        <% if @sermon.categories.any? %>
+          <p>Category: <%= render @sermon.categories %></p>
+        <% end %>
         <p>
           <strong>Sermon:</strong>
         </p>

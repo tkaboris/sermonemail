@@ -22,8 +22,12 @@
   <div class="col-lg-6 well">
     <h4><%= link_to sermon.name, sermon_path(sermon) %></h4>
     <p><%= sermon.summary %></p>
-    <p>Topic: <%= render sermon.topics %></p>
-    <p>Category: <%= render sermon.categories %></p>
+    <% if sermon.topics.any? %>
+      <p>Topic: <%= render sermon.topics %></p>
+    <% end %>
+    <% if sermon.categories.any? %>
+      <p>Category: <%= render sermon.categories %></p>
+    <% end %>
     <p>
       <span class="quiet"><small>created: <%= time_ago_in_words(sermon.created_at) %> ago, </small></span>
       <span class="quiet"><small>updated: <%= time_ago_in_words(sermon.updated_at) %> ago</small></span>
