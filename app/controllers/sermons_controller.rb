@@ -23,7 +23,8 @@ class SermonsController < ApplicationController
 	  
 	  if @sermon.save
 	    flash[:success] = "Your sermon was successfully created"
-	    redirect_to sermons_path
+	    redirect_to @sermon
+	    # redirect_to @sermon
 	  else
 	    render :new
 	  end

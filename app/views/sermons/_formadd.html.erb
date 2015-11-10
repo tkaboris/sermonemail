@@ -1,0 +1,15 @@
+<div class="row">
+  <div class="well col-md-8 col-md-offset-2">
+    <%= form_for(@sermon, html: { multipart: true}) do |f| %>
+   
+    
+    <%= f.label :description %>
+    <%= f.text_area :description, rows: 10 %>
+    
+    
+    <%= f.submit(@sermon.new_record? ? "Add to new sermon" : "Edit Sermon", class: "btn btn-success") %>
+    <% end %>
+  </div>
+</div>
+
+

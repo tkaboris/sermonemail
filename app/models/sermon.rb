@@ -1,6 +1,10 @@
 class Sermon < ActiveRecord::Base
   belongs_to :pastor
   has_many :likes
+  has_many :sermon_topics
+  has_many :topics, through: :sermon_topics
+  has_many :sermon_categories
+  has_many :categories, through: :sermon_categories
   validates :pastor_id, presence: true 
   validates :name, presence: true, length: { minimum: 5, maximum: 100 }
   validates :summary, presence: true, length: { minimum: 10, maximum: 150 }
