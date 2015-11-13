@@ -1,9 +1,9 @@
 class Sermon < ActiveRecord::Base
   belongs_to :pastor
-  has_many :likes
-  has_many :sermon_topics
+  has_many :likes, dependent: :destroy
+  has_many :sermon_topics, dependent: :destroy
   has_many :topics, through: :sermon_topics
-  has_many :sermon_categories
+  has_many :sermon_categories, dependent: :destroy
   has_many :categories, through: :sermon_categories
   validates :pastor_id, presence: true 
   validates :name, presence: true, length: { minimum: 5, maximum: 100 }

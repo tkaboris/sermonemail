@@ -8,7 +8,7 @@ Rails.application.routes.draw do
       post 'like'
     end
   end
-  resources :pastors, except: [:new]
+  resources :pastors, except: [:new, :destroy]
   get '/register', to: 'pastors#new'
     
  get '/login', to: "logins#new"

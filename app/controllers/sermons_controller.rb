@@ -3,6 +3,7 @@ class SermonsController < ApplicationController
 	before_action :require_user, except: [:show, :index, :like]
 	before_action :require_user_like, only: [:like]
 	before_action :require_same_user, only: [:edit, :update]
+	before_action :admin_user, only: :destroy
 	
 	
 	def index
@@ -54,11 +55,11 @@ class SermonsController < ApplicationController
 		end
 	end
 	
-	# def destroy
- #   Sermon.find(params[:id]).destroy
- #   flash[:success] = "Sermon Deleted"
- #   redirect_to recipes_path
- # end
+	def destroy
+    Sermon.find(params[:id]).destroy
+    flash[:success] = "Sermon Deleted"
+    redirect_to sermons_path
+  end
 		
 	private
 	  def sermon_params
@@ -70,9 +71,14 @@ class SermonsController < ApplicationController
 	  end
 	  
 	  def require_same_user
-	  	if current_user != @sermon.pastor
+	  	if current_user != @sermon.pastor and !current_user.admin? 
+	  		# if sermon creator or admin then allow this action
 	  		flash[:danger] = "You can only edit your sermons"
 	  		redirect_to sermons_path
 	  	end
+		end
+		
+		def admin_user
+			redirect_to sermons_path unless current_user.admin?
 		end
 end

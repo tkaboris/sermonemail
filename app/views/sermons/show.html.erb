@@ -8,8 +8,13 @@
     </p>
   </div>
   <div class="col-md-8">
-    <% if logged_in? and @sermon.pastor == current_user %>
+    <% if logged_in? and (@sermon.pastor == current_user || current_user.admin?) %>
+    <!--<% if @sermon.pastor == current_user || (logged_in? && current_user.admin) %>-->
       <%= link_to "Edit this Sermon", edit_sermon_path(@sermon), class: "btn btn-success pull-right" %>
+    <% end %>
+    <% if current_user.admin? %>
+      <%= link_to "[Delete Sermon]", @sermon, method: :delete, data:{ confirm: "Are you sure" } %>
+    <% end %>
     <% end %>
     <h3><%= @sermon.summary %></h3>
     <div class="show_sermon">
@@ -38,4 +43,5 @@
     
   </div>
 </div>
+
 <h5><%= link_to "Return to sermons listings", sermons_path, class: "btn btn-warning btn-small" %></h5>
