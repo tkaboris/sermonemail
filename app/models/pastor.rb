@@ -1,6 +1,7 @@
 class Pastor < ActiveRecord::Base
   has_many :sermons
   has_many :likes
+  has_many :reviews
   #email valid regular expression:
    VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
    

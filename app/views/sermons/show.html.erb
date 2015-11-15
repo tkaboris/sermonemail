@@ -12,7 +12,7 @@
     <!--<% if @sermon.pastor == current_user || (logged_in? && current_user.admin) %>-->
       <%= link_to "Edit this Sermon", edit_sermon_path(@sermon), class: "btn btn-success pull-right" %>
     <% end %>
-    <% if current_user.admin? %>
+    <% if logged_in? and current_user.admin? %>
       <%= link_to "[Delete Sermon]", @sermon, method: :delete, data:{ confirm: "Are you sure" } %>
     <% end %>
     <% end %>
@@ -44,4 +44,82 @@
   </div>
 </div>
 
+<!--begin review form -->
+
+
+
+
+
+
 <h5><%= link_to "Return to sermons listings", sermons_path, class: "btn btn-warning btn-small" %></h5>
+
+<div class="row">
+    <div class="col-md-9 col-md-offset-2">
+        
+        <div id="comform">
+        
+        <h5 style="margin-top: 0px;">Leave a Comment  <button id="btncancel" class="btn btn-danger btn-xs">Cancel</button> </h5>
+            <%= form_tag(review_sermon_path, :method=>'post') do %>
+                <div class="form-group">
+                    <%= text_area_tag 'content', nil, rows:5, cols: 40, class:"form-control" %><br />
+                </div>
+            <%= submit_tag "Submit Comment", class: "btn btn-primary" %> 
+             <% end %>
+           
+        </div>
+        
+        <% if logged_in? %>
+            <% if @sermon.pastor_reviews(current_user).size==1 %>
+                <% pastcom = @sermon.pastor_reviews(current_user).first %>
+               
+                <p class="well"><b>You have commented: &nbsp;&nbsp;&nbsp;</b> <%= @sermon.pastor_reviews(current_user).first.body %> 
+                | <%= link_to "Delete comment", review_path(pastcom), method: :delete %> </p>
+                
+            <% else %>
+                <button id="btncom" class="btn btn-primary">Leave a comment</button>
+            <% end %>
+        <% else %>
+             <h5 style="margin-top: 0px;"> <%= link_to "Log in ", login_path %> to leave a Comment</h5>
+        <% end %>
+    </div>
+</div>
+<div class="row">
+     <div class="col-md-9 col-md-offset-2">
+    <h2>All Comments</h2>
+    <table width=100%>
+    <th>Posted By</th><th>Comment</th>
+    <% @reviews.each do |rev| %>
+    <tr class="well">
+        <td width=20%>
+            <div class="pull-left">
+                <%= get_gravimage(rev.pastor, size:50) %>
+            </div>
+            <div style="width:50px;padding-top:10px;padding-left:10px;float:left;">
+                <small><%= rev.pastor.pastorname %> </small>
+            </div>
+        </td>
+        <td class="comment">
+            <%= rev.body %>
+            <br><small><i><%= rev.updated_at.strftime("%m/%d/%Y") %></i></small>
+        </td>
+    </tr>
+    <% end %>
+    </table>
+    </div>
+</div>
+
+<script type = "text/javascript">
+  $('document').ready(function() {
+    $("#comform").hide();  
+   $("#btncom").click(function(){ 
+    $("#comform").slideDown("fast");  
+     $("#btncom").hide();
+   });
+   $("#btncancel").click(function(){ 
+    $("#comform").hide();  
+     $("#btncom").show();
+   });
+});
+  
+ 
+</script>

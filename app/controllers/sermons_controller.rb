@@ -1,5 +1,5 @@
 class SermonsController < ApplicationController
-	before_action :set_sermon, only: [:edit, :update, :show, :like]
+	before_action :set_sermon, only: [:edit, :update, :show, :like, :review]
 	before_action :require_user, except: [:show, :index, :like]
 	before_action :require_user_like, only: [:like]
 	before_action :require_same_user, only: [:edit, :update]
@@ -11,9 +11,22 @@ class SermonsController < ApplicationController
 	  # change to sort by date
 	end
 	
+	
 	def show
-	  
-	end
+     @reviews = @sermon.reviews
+  end
+  
+  
+  
+  def review
+      review = Review.create(body: params[:body], pastor: current_user, sermon: @sermon)
+      if review.valid?
+        flash[:success] = "Your comment was recorded."
+      else
+        flash[:danger] = "You can only comment once per sermon."
+      end
+      redirect_to :back
+  end
 	
 	def new
 	  @sermon = Sermon.new 
@@ -60,6 +73,8 @@ class SermonsController < ApplicationController
     flash[:success] = "Sermon Deleted"
     redirect_to sermons_path
   end
+  
+  
 		
 	private
 	  def sermon_params

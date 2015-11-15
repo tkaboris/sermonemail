@@ -38,6 +38,7 @@ group :development, :test do
   # Use sqlite3 as the database for Active Record
   gem 'sqlite3'
   gem 'pry'
+  gem "better_errors"
 end
 
 group :production do
